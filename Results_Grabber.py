@@ -22,7 +22,8 @@ CONFERENCE = 3
 # Note that 2 is for some reason not a valid grouping id, so we skip it :(
 GROUPING_IDS = [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
 
-data_with_columns = {
+for district in range(1, DISCTRICTS_COUNT + 1):
+    data_with_columns = {
         'Contest_ID': [],
         'Place': [],
         'School': [],
@@ -35,8 +36,6 @@ data_with_columns = {
         'Chemistry': [],     # Science Only
         'Physics': []        # Science Only
     }
-
-for district in range(1, DISCTRICTS_COUNT + 1):
     for grouping_id in GROUPING_IDS:
         # Getting stuff from url
         xhtml = urlGetContents(f'https://postings.speechwire.com/r-uil-academics.php?groupingid={grouping_id}&Submit=View+postings&region=&district={district}&state=&conference={CONFERENCE}&seasonid={SEASON_ID}').decode('utf-8')
@@ -99,8 +98,4 @@ for district in range(1, DISCTRICTS_COUNT + 1):
                 data_with_columns['Objective'].append(None)
                 data_with_columns['Essay'].append(None)
 
-# Outputs to the markdown file as it is too big for the terminal
-print("Writing to ResultsTesting.md...")
-with open("ResultsTesting.md", "w") as file:
-    file.write(pd.DataFrame(data_with_columns).to_markdown())
-print("All Done.")
+    pd.DataFrame(data_with_columns).to_csv(f'Results_{CONFERENCE}A_{district}D.csv', index=False)
