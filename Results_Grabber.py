@@ -99,10 +99,8 @@ for district in range(1, DISCTRICTS_COUNT + 1):
                 data_with_columns['Objective'].append(None)
                 data_with_columns['Essay'].append(None)
 
-# converting the parsed data to dataframe
-print("\nTable\n")
-# print(pd.DataFrame(data_with_columns))
-# print(pd.DataFrame(data_with_columns).to_markdown())
-
+# Outputs to the markdown file as it is too big for the terminal
+print("Writing to ResultsTesting.md...")
 with open("ResultsTesting.md", "w") as file:
     file.write(pd.DataFrame(data_with_columns).to_markdown())
+print("All Done.")
