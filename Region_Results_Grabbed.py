@@ -1,9 +1,9 @@
 # Author: Adele Bosma
-# Purpose: Grabs all district data from the UIL website for the given year and saves it to a csv file.
+# Purpose: Grabs all region data from the UIL website for the given year and saves it to a csv file.
 # How to use: Verify you are correct year's information you are looking for by seeing the season id in the url. For example, for the 2025-2026 season,
-# you want to make sure SEASON_ID is set to 18. Then, run the script and it will create a folder for each conference and save the district results in that folder.
-# The naming conventions for the files are Results_{conference}A_{district}D.csv. For example, the results for conference 1A district 1 will be saved as 
-# Results_1A_1D.csv in the Results_1A folder.
+# you want to make sure SEASON_ID is set to 18. Then, run the script and it will create a folder for each conference and save the region results in that folder.
+# The naming conventions for the files are Results_{conference}A_{region}R.csv. For example, the results for conference 1A region 1 will be saved as 
+# Results_1A_1R.csv in the Results_1A folder.
 import pandas as pd
 import urllib.request
 from html_table_parser.parser import HTMLTableParser
@@ -19,14 +19,14 @@ def urlGetContents(url):
 
 # Constants
 CONFERENCE_COUNT = 6
-DISTRICTS_COUNT = 32
+REGION_COUNT = 4
 SEASON_ID = 18
 
 # Note that 2 is for some reason not a valid grouping id, so we skip it :(
 GROUPING_IDS = [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
 
 for conference in range(1, CONFERENCE_COUNT + 1):
-    for district in range(1, DISTRICTS_COUNT + 1):
+    for region in range(1, REGION_COUNT + 1):
         data_with_columns = {
             'Contest_ID': [],
             'Place': [],
@@ -42,7 +42,7 @@ for conference in range(1, CONFERENCE_COUNT + 1):
         }
         for grouping_id in GROUPING_IDS:
             # Getting stuff from url
-            xhtml = urlGetContents(f'https://postings.speechwire.com/r-uil-academics.php?groupingid={grouping_id}&Submit=View+postings&region=&district={district}&state=&conference={conference}&seasonid={SEASON_ID}').decode('utf-8')
+            xhtml = urlGetContents(f'https://postings.speechwire.com/r-uil-academics.php?groupingid={grouping_id}&Submit=View+postings&region={region}&district=&state=&conference={conference}&seasonid={SEASON_ID}').decode('utf-8')
             p = HTMLTableParser()
             p.feed(xhtml)
 
@@ -102,4 +102,4 @@ for conference in range(1, CONFERENCE_COUNT + 1):
                     data_with_columns['Essay'].append(None)
 
         # Saving the data to a csv file
-        pd.DataFrame(data_with_columns).to_csv(f'Results_{conference}A//Results_{conference}A_{district}D.csv', index=False)
+        pd.DataFrame(data_with_columns).to_csv(f'Results_{conference}A//Results_{conference}A_{region}R.csv', index=False)
