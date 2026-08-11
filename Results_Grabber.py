@@ -100,4 +100,4 @@ for conference in range(1, CONFERENCE_COUNT + 1):
                     data_with_columns['Objective'].append(None)
                     data_with_columns['Essay'].append(None)
 
-        pd.DataFrame(data_with_columns).to_csv(f'Results_{conference}A_{district}D.csv', index=False)
+        pd.DataFrame(data_with_columns).to_csv(f'Results_{conference}A//Results_{conference}A_{district}D.csv', index=False)
