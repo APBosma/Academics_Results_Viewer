@@ -1,5 +1,31 @@
 import customtkinter as ctk
 
+# Constants
+DISTRICT_COUNT = 32
+REGION_COUNT = 4
+CONFERENCE_COUNT = 6
+COMPETITIONS = {"Accounting": 1,
+                "Current Issues and Events": 3,
+                "Literary Criticism": 4,
+                "Ready Writing": 5,
+                "Social Studies": 6,
+                "Spelling": 7,
+                "Calculator Applications": 8,
+                "Computer Applications": 9,
+                "Mathematics": 10,
+                "Number Sense": 11,
+                "Science": 12,
+                "Copy Editing": 13,
+                "Editorial": 14,
+                "Feature Writing": 15,
+                "Headline Writing": 16,
+                "News Writing": 17,
+                "Informative Speaking": 18,
+                "Persuasive Speaking": 19,
+                "Lincoln Douglas Debate": 20,
+                "Poetry Interpretation": 21,
+                "Prose Interpretation": 22 }
+
 class CollapsibleFrame(ctk.CTkFrame):
     def __init__(self, parent, title, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
@@ -59,7 +85,7 @@ class App(ctk.CTk):
         # 2. Competitions Filt
         self.comp_frame = CollapsibleFrame(self.sidebar, "Competitions")
         self.comp_frame.pack(fill="x", padx=10, pady=5)
-        for comp in ["Number Sense", "Calculator Applications", "Mathematics", "Science"]:
+        for comp in COMPETITIONS:
             btn = ctk.CTkRadioButton(self.comp_frame.content_frame, text=comp)
             btn.pack(anchor="w", pady=4)
             
