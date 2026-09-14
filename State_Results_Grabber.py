@@ -99,5 +99,5 @@ for conference in range(1, CONFERENCE_COUNT + 1):
                 data_with_columns['Objective'].append(None)
                 data_with_columns['Essay'].append(None)
 
-        # Saving the data to a csv file
-        pd.DataFrame(data_with_columns).to_csv(f'Results_{conference}A//Results_{conference}A_State.csv', index=False)
+    # Saving the data to a csv file
+    pd.DataFrame(data_with_columns).to_csv(f'Results_{conference}A//Results_{conference}A_State.csv', index=False)
