@@ -28,3 +28,14 @@ def get_results_queries(conference, compType, compNumber, competition):
     return df.dropna(axis = 1, how = 'all')
 
 print(get_results_queries("1A", "District", "1", 12))
+
+def get_multiple_results(conference, compType, compNumbers, competition):
+    df = pd.DataFrame()  # Initialize an empty DataFrame to store results
+    for comp in compNumbers:
+        df = pd.concat([df, get_results_queries(conference, compType, comp, competition)], axis = 0)
+
+    df = df.sort_values(by = ['Total'], ascending = False)  # Sort the DataFrame by 'Total' in descending order
+    return df.dropna(axis = 1, how = 'all')
+
+print(get_multiple_results("1A", "District", ["1", "2"], 11))
+        
